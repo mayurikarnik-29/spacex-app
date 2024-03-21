@@ -1,0 +1,9 @@
+<mat-toolbar color="primary">
+    <span>SpaceX Launchpad</span>
+    <span class="row-spacer"></span>
+    @if (showSearchBox) {
+    <mat-form-field class="launchpad-searchbox" (keyup)="search($event)">
+        <input matInput placeholder="Search">
+    </mat-form-field>
+    }   
+</mat-toolbar>

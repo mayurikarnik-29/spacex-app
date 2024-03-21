@@ -1,0 +1,25 @@
+<app-toolbar (toolbarEvent)="onToolbarEvent($event)" [showSearchBox]="true"></app-toolbar>
+<div class="viewport">
+    <!-- New built-in control flow (Angular 17) -->
+    @for (launchpad of launchpads; track launchpad.id) {
+    <mat-card color="primary" class="launchpad-card">
+        <mat-card-header>
+            <mat-card-title>{{launchpad.name}}</mat-card-title>
+            <mat-card-subtitle>{{launchpad.region}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-list [ngClass]="{'small': launchpad.wikipedia}">
+                @for (launch of launchpad.launches; track launch) {
+                <mat-list-item>{{launch}}</mat-list-item>
+                }
+            </mat-list>
+            @if (launchpad.wikipedia) {
+            <p><a [href]="launchpad.wikipedia" target="_blank">Wikipedia</a></p>
+            }
+        </mat-card-content>
+    </mat-card>
+    }
+</div>
+<mat-paginator [length]="totalDocs" [pageSize]="limit" [pageSizeOptions]="[5, 10, 15]" aria-label="Select page"
+    (page)="onPaginator($event)">
+</mat-paginator>
