@@ -1,0 +1,11 @@
+@import "../../../assets/styles/theme.scss";
+
+mat-paginator {
+    background-color: $background-color;
+    color: $foreground-color;
+}
+
+mat-form-field {
+    background-color: $background-color;
+    color: $foreground-color;
+}

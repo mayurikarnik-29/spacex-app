@@ -1,9 +1,14 @@
+@import "../../../assets/styles/theme.scss";
+
 mat-toolbar {
+  background-color: $background-color;
+  color: $foreground-color;
+
   .row-spacer {
     flex: 1 1 auto;
   }
 
-  .launchpad-searchbox {
+  mat-form-field.launchpad-searchbox {
     padding-top: 20px;
   }
 }

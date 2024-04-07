@@ -1,0 +1,26 @@
+.dialog-wrapper {
+    padding: 5px 20px;
+
+    mat-list {
+        mat-icon {
+            font-size: 15px;
+            height: 15px;
+            vertical-align: middle;
+
+            &:not(.mat-warn) {
+                color: rgb(0, 128, 0);
+            }
+        }
+
+        .launch-name-date {
+            display: flex;
+            align-items: center;
+
+            .date {
+                margin-left: auto;
+                font-size: 12px;
+                font-style: italic;
+            }
+        }
+    }
+}

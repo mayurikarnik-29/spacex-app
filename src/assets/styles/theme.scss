@@ -1,0 +1,35 @@
+// Custom Theming for Angular Material
+@use 'sass:map';
+@use '@angular/material' as mat;
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+$theme-primary: mat.define-palette(mat.$blue-grey-palette);
+$theme-accent: mat.define-palette(mat.$cyan-palette, A200, A100, A400);
+
+// Create the theme object
+$theme: mat.define-light-theme((color: (primary: $theme-primary,
+        accent: $theme-accent ),
+      typography: mat.define-typography-config(),
+      density: 0));
+
+// Include theme styles for core and each component used in your app.
+// @include mat.all-component-themes($theme);
+@include mat.core-theme($theme);
+@include mat.form-field-theme($theme); // Form-Field theme
+@include mat.input-theme($theme);
+@include mat.button-theme($theme);
+// Get the color config from the theme.
+$color-config: mat.get-color-config($theme);
+
+// Get the primary color palette from the color-config.
+$primary-palette: map.get($color-config, 'primary');
+$accent-palette: map.get($color-config, 'accent');
+
+$foreground-color: mat.get-color-from-palette($accent-palette, 50);
+$secondary-foreground-color: mat.get-color-from-palette($accent-palette, 200);
+$background-color: mat.get-color-from-palette($primary-palette, 900);
+$highlight-color: mat.get-color-from-palette($primary-palette, 600);
+$card-color: mat.get-color-from-palette($accent-palette, 900);

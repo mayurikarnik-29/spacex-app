@@ -1,14 +1,93 @@
+@import "../../../assets/styles/theme.scss";
+
 // Custom CSS for Card
-.launchpad-card {
+mat-card.launchpad-card {
+  min-width: 150px;
+  background-color: $card-color;
+  color: $foreground-color;
+  box-shadow: 0px 0px 5px 2px rgba(55, 71, 79, 0.7);
+  height: calc(50% - 20px);
+  cursor: pointer;
+
+  mat-card-subtitle {
+    color: $secondary-foreground-color;
+  }
+
+  div.img {
+    width: 100%;
+    height: 170px;
+    background-size: cover;
+    margin: 5px 0 10px 0;
+    overflow: hidden;
+
+    .detail-box {
+      top: 100%;
+      position: relative;
+      transition: all .3s ease-out;
+      background: $highlight-color;
+      height: calc(100% - 20px);
+      padding: 10px;
+      font-size: 14px;
+      text-align: justify;
+      line-height: 18px;
+
+      p {
+        margin: 0;
+
+        &.fullname {
+          font-size: 15px;
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+
+        &.attempts {
+          margin-bottom: 5px;
+
+          b {
+            color: $secondary-foreground-color;
+          }
+
+          span {
+            color: $foreground-color;
+            font-size: 18px;
+          }
+        }
+      }
+    }
+
+  }
+
+  &:hover .detail-box {
+    top: 45px !important;
+  }
+
+  div.launches-button-wrapper {
+    text-align: center;
+    padding-top: 5px;
+  }
+}
+
+mat-card.launchpad-card:nth-child(5n+1),
+mat-card.launchpad-card:nth-child(5n+2),
+mat-card.launchpad-card:nth-child(5n+3) {
+  flex: 0 0 calc(33.33% - 20px);
   margin: 10px;
-  width: 100%;
+}
+
+mat-card.launchpad-card:nth-child(5n+4),
+mat-card.launchpad-card:nth-child(5n+5) {
+  flex: 0 0 calc(50% - 20px);
+  margin: 10px;
 }
 
 // Setting height to viewport and card
 .viewport {
-  height: calc(100% - 64px - 56px);
-  padding-right: 20px;
-  overflow: auto;
+  height: calc(100vh - 64px - 56px);
+  padding: 0 20px;
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  margin: 0 -10px;
 
   mat-list {
     overflow-y: auto;
@@ -17,5 +96,75 @@
     &.small {
       height: 125px;
     }
+  }
+}
+
+mat-sidenav {
+  padding-left: 20px;
+  background-color: $background-color;
+  color: $foreground-color;
+
+  .column-spacer {
+    flex: 1 1 auto;
+  }
+
+  h3 {
+    min-width: 200px;
+  }
+
+  ul {
+    padding-left: 0;
+    margin: 0;
+
+    li {
+      list-style: none;
+      padding: 10px 5px;
+      border-radius: 5px;
+      font-size: 14px;
+      margin: 5px 0;
+
+      &.active {
+        background-color: $highlight-color
+      }
+
+      mat-icon {
+        vertical-align: middle;
+
+        &:not(.profile) {
+          font-size: 18px;
+          vertical-align: middle;
+          height: 21px;
+          width: 21px;
+        }
+      }
+
+      span {
+        vertical-align: middle;
+        display: inline-block;
+        margin-left: 5px;
+      }
+    }
+  }
+
+  mat-icon.rocket {
+    font-size: 36px;
+    width: 34px;
+    height: 34px;
+    margin-bottom: -2px;
+    animation: move-up 2s infinite;
+    position: relative;
+  }
+}
+
+mat-sidenav-container {
+  background: $background-color;
+}
+
+@keyframes move-up {
+  0% {
+    top: 0; /* Start position */
+  }
+  100% {
+    top: -5px; /* Middle position */
   }
 }

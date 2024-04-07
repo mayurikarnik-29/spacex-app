@@ -1,25 +1,62 @@
 <app-toolbar (toolbarEvent)="onToolbarEvent($event)" [showSearchBox]="true"></app-toolbar>
-<div class="viewport">
-    <!-- New built-in control flow (Angular 17) -->
-    @for (launchpad of launchpads; track launchpad.id) {
-    <mat-card color="primary" class="launchpad-card">
-        <mat-card-header>
-            <mat-card-title>{{launchpad.name}}</mat-card-title>
-            <mat-card-subtitle>{{launchpad.region}}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <mat-list [ngClass]="{'small': launchpad.wikipedia}">
-                @for (launch of launchpad.launches; track launch) {
-                <mat-list-item>{{launch}}</mat-list-item>
-                }
-            </mat-list>
-            @if (launchpad.wikipedia) {
-            <p><a [href]="launchpad.wikipedia" target="_blank">Wikipedia</a></p>
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav mode="side" opened class="example-sidenav" [fixedInViewport]="true" [fixedTopGap]="0"
+        [fixedBottomGap]="0">
+        <h3><mat-icon aria-hidden="false" aria-label="Logo" fontIcon="rocket" class="rocket"></mat-icon>SpaceX Launchpad
+        </h3>
+        <ul>
+            <li class="active"><mat-icon aria-hidden="false" aria-label="Dashboard icon"
+                    fontIcon="home"></mat-icon>Dashboard</li>
+            <li><mat-icon aria-hidden="false" aria-label="Link icon 2" fontIcon="support"></mat-icon>Sidenav Link 2</li>
+            <li><mat-icon aria-hidden="false" aria-label="Link icon 3" fontIcon="support"></mat-icon>Sidenav Link 3</li>
+            <li><mat-icon aria-hidden="false" aria-label="Link icon 4" fontIcon="support"></mat-icon>Sidenav Link 4</li>
+            <mat-divider></mat-divider>
+            <li><mat-icon aria-hidden="false" aria-label="Settings icon" fontIcon="settings"></mat-icon>Settings</li>
+            <li><mat-icon aria-hidden="false" aria-label="Help icon" fontIcon="chat"></mat-icon>Help</li>
+        </ul>
+        <span class="column-spacer"></span>
+        <ul>
+            <mat-divider></mat-divider>
+            <li><mat-icon aria-hidden="false" aria-label="User profile" fontIcon="account_circle"
+                    class="profile"></mat-icon><span>SpaceX User</span></li>
+        </ul>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <div class="viewport">
+            <!-- New built-in control flow (Angular 17) -->
+            @for (launchpad of launchpads; track launchpad.id) {
+            <mat-card color="primary" class="launchpad-card">
+                <mat-card-header>
+                    <mat-card-title>{{launchpad.name}}</mat-card-title>
+                    <mat-card-subtitle>{{launchpad.region}}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    @if (launchpad.images) {
+                    <div class="img" [ngStyle]="{'background-image': 'url(' + launchpad.images.large[0] + ')'}">
+                        <div class="detail-box">
+                            <p class="fullname">{{launchpad.full_name}}</p>
+                            <p class="attempts"><b>Launch Attempts:</b> {{launchpad.launch_attempts}}<span> |
+                                </span><b>Successful Attempts:</b> {{launchpad.launch_successes}}</p>
+                            <p class="details">{{launchpad.details | slice:0:100}}...</p>
+                        </div>
+                    </div>
+                    }
+                    <div class="launches-button-wrapper"
+                        [matTooltip]="launchpad.launches.length == 0 ? 'No launches to display' : ''">
+                        <button mat-raised-button (click)="openDialog(launchpad.launches, launchpad.name)"
+                            color="primary" [disabled]="launchpad.launches.length == 0">View
+                            Launches</button>
+                    </div>
+                    @if (launchpad.wikipedia) {
+                    <p><a [href]="launchpad.wikipedia" target="_blank">Wikipedia</a></p>
+                    }
+                </mat-card-content>
+            </mat-card>
             }
-        </mat-card-content>
-    </mat-card>
-    }
-</div>
-<mat-paginator [length]="totalDocs" [pageSize]="limit" [pageSizeOptions]="[5, 10, 15]" aria-label="Select page"
-    (page)="onPaginator($event)">
-</mat-paginator>
+        </div>
+        <app-paginator [length]="totalDocs" [pageSize]="limit" [pageSizeOptions]="[5, 10, 15]" [label]="'Select page'"
+            (page)="onPaginator($event)"></app-paginator>
+    </mat-sidenav-content>
+</mat-sidenav-container>

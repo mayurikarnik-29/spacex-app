@@ -3,7 +3,7 @@ export interface LaunchPad {
   full_name: string;
   id: string;
   images: {
-    large?: string[];
+    large: string[];
     small?: string[];
   };
   latitude: number;
@@ -29,7 +29,7 @@ export interface LaunchPadSearchResult {
   offset: number | null;
   page: number;
   pagingCounter: number;
-  prevPage: number| null;
+  prevPage: number | null;
   totalDocs: number;
   totalPages: number;
 }
@@ -47,3 +47,24 @@ export type ToolbarEvent = {
   type: ToolbarEventType;
   event: KeyboardEvent | MouseEvent;
 };
+
+export interface Launch {
+  auto_update: boolean;
+  capsules: string[];
+  date_local: Date;
+  date_precision: string;
+  date_unix: number;
+  date_utc: Date;
+  details: string;
+  flight_number: number;
+  id: string;
+  launch_library_id: string;
+  launchpad: string;
+  name: string;
+  net: boolean;
+  payloads: string[];
+  rocket: string;
+  ships: string[];
+  success: boolean;
+  upcoming: boolean;
+}

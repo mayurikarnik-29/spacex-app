@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LaunchpadService } from '../../services/launchpad/launchpad.service';
 import {
   LaunchPad,
@@ -7,16 +7,19 @@ import {
   ToolbarEvent,
   ToolbarEventType,
 } from '../../models/launchpad';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+import { LaunchesComponent } from '../launches/launches.component';
 
 @Component({
   selector: 'app-launchpad',
   templateUrl: './launchpad.component.html',
   styleUrl: './launchpad.component.scss',
 })
-export class LaunchpadComponent {
+export class LaunchpadComponent implements OnInit, OnDestroy {
   launchpads$: Observable<LaunchPadSearchResult>;
+  launchpadSubscription: Subscription;
   launchpads: LaunchPad[] = [];
   totalDocs: number;
   limit: number = 5;
@@ -25,7 +28,7 @@ export class LaunchpadComponent {
     query: {},
     options: { limit: 5, page: 1 },
   };
-  constructor(private launchpadService: LaunchpadService) { }
+  constructor(private launchpadService: LaunchpadService, public dialog: MatDialog) { }
   ngOnInit(): void {
     this.getLaunchpads();
   }
@@ -34,7 +37,7 @@ export class LaunchpadComponent {
     this.launchpads$ = this.launchpadService.queryLaunchpads(
       this.launchpadQuery,
     );
-    this.launchpads$.subscribe((data) => {
+    this.launchpadSubscription = this.launchpads$.subscribe((data) => {
       this.launchpads = data.docs;
       this.totalDocs = data.totalDocs;
       this.limit = data.limit;
@@ -86,5 +89,18 @@ export class LaunchpadComponent {
       },
     };
     this.getLaunchpads();
+  }
+
+  openDialog(launches: string[], launchpadName: string) {
+    const dialogRef = this.dialog.open(LaunchesComponent, {
+      width: '40vw',
+      height: '60vh',
+      panelClass: 'launches-dialog-panel',
+      data: { launches: launches, launchpad: launchpadName },
+    });
+  }
+
+  ngOnDestroy() {
+    this.launchpadSubscription.unsubscribe()
   }
 }

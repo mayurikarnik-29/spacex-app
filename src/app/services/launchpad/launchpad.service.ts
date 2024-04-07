@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { LaunchpadQuery, LaunchPadSearchResult } from '../../models/launchpad';
+import { Launch, LaunchpadQuery, LaunchPadSearchResult } from '../../models/launchpad';
 @Injectable({
   providedIn: 'root',
 })
@@ -24,5 +24,11 @@ export class LaunchpadService {
         query,
       );
     }
+  }
+
+  queryLaunches(launch: string): Observable<Launch> {
+    return this.http.get<any>(
+      `${this.lauchpadUrl}/launches/${launch}`
+    );
   }
 }

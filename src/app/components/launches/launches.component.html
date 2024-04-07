@@ -1,0 +1,15 @@
+<h4 mat-dialog-title>Launches from {{data.launchpad}}</h4>
+<mat-dialog-content class="dialog-wrapper">
+    <mat-list class="launches-list">
+        @for (launch of (launches$ | async); track launch.id) {
+        <mat-divider></mat-divider>
+        <mat-list-item role="listitem">
+            <div class="launch-name-date">
+                <mat-icon aria-hidden="false" fontIcon="rocket" [color]="launch.success ? 'warn' : ''"></mat-icon>
+                <span>{{launch.name}}</span>
+                <span class="date">{{launch.date_utc | date: 'dd/MM/yyyy'}}</span>
+            </div>
+        </mat-list-item>
+        }
+    </mat-list>
+</mat-dialog-content>
