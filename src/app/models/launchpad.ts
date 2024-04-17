@@ -51,10 +51,10 @@ export type ToolbarEvent = {
 export interface Launch {
   auto_update: boolean;
   capsules: string[];
-  date_local: Date;
+  date_local: string;
   date_precision: string;
   date_unix: number;
-  date_utc: Date;
+  date_utc: string;
   details: string;
   flight_number: number;
   id: string;

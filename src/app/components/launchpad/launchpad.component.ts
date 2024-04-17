@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { LaunchpadService } from '../../services/launchpad/launchpad.service';
 import {
   LaunchPad,
@@ -11,6 +11,7 @@ import { Observable, Subscription } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { LaunchesComponent } from '../launches/launches.component';
+import { PaginatorComponent } from '../paginator/paginator.component';
 
 @Component({
   selector: 'app-launchpad',
@@ -28,6 +29,7 @@ export class LaunchpadComponent implements OnInit, OnDestroy {
     query: {},
     options: { limit: 5, page: 1 },
   };
+  @ViewChild(PaginatorComponent) paginatorComponent: PaginatorComponent;
   constructor(private launchpadService: LaunchpadService, public dialog: MatDialog) { }
   ngOnInit(): void {
     this.getLaunchpads();
@@ -56,6 +58,10 @@ export class LaunchpadComponent implements OnInit, OnDestroy {
   queryLaunchpads(event: KeyboardEvent) {
     this.launchpadQuery = {
       ...this.launchpadQuery,
+      options: {
+        limit: this.limit,
+        page: 1,
+      },
       query: {
         ...((event.target as HTMLInputElement)?.value && {
           $or: [
@@ -75,6 +81,7 @@ export class LaunchpadComponent implements OnInit, OnDestroy {
         }),
       },
     };
+    this.paginatorComponent.paginator.firstPage()
     this.getLaunchpads();
   }
 

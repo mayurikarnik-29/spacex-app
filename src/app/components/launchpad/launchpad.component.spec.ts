@@ -63,4 +63,13 @@ describe('LaunchpadComponent', () => {
       expect(component.launchpads).toEqual(response.docs);
     })
   })
+
+  describe('openDialog', () => {
+    it('should show launches when "View Launches" is clicked', () => {
+      const spy = spyOn(component.dialog, 'open').and.callThrough()
+      component.openDialog(['test'], 'test');
+      fixture.detectChanges();
+      expect(spy).toHaveBeenCalled();
+    })
+  })
 });

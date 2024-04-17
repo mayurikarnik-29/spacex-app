@@ -25,12 +25,13 @@ describe('LaunchpadService', () => {
     });
   });
 
-  it('#queryLaunchpads for local API', (done) => {
-    service.useLocal = true;
-    const query = {options: {}, query: {}}
-    service.queryLaunchpads(query).subscribe((value) => {
-      expect(value).toBeDefined()
-      done();
-    });
-  });
+  // Test to run when using local API
+  // it('#queryLaunchpads for local API', (done) => {
+  //   service.useLocal = true;
+  //   const query = {options: {}, query: {}}
+  //   service.queryLaunchpads(query).subscribe((value) => {
+  //     expect(value).toBeDefined()
+  //     done();
+  //   });
+  // });
 });

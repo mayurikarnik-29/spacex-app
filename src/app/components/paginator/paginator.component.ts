@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MAT_SELECT_CONFIG, MatSelectConfig } from '@angular/material/select';
 
 @Component({
@@ -21,6 +21,7 @@ export class PaginatorComponent {
     @Input() pageSizeOptions: number[];
     @Input() label: string;
     @Output() page = new EventEmitter<PageEvent>();
+    @ViewChild(MatPaginator) paginator: MatPaginator;
 
     constructor() { }
 

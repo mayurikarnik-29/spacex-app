@@ -75,3 +75,33 @@ export const paginationEventMock = {
     pageSize: 1,
     length: 1
 }
+
+export const launchesMock = {
+    auto_update: true,
+    capsules: [],
+    cores: [],
+    crew: [],
+    date_local: "2017-08-24T11:50:00-07:00",
+    date_precision: "hour",
+    date_unix: 1503600600,
+    date_utc: "2017-08-24T18:50:00.000Z",
+    details: "Lorem Ipsum",
+    failures: [],
+    fairings: { reused: false, recovery_attempt: false, recovered: false, ships: [] },
+    flight_number: 46,
+    id: "5eb87d08ffd86e000604b357",
+    launch_library_id: "test",
+    launchpad: "5e9e4502f509092b78566f87",
+    links: { patch: { small: "" } },
+    name: "Test Launch",
+    net: false,
+    payloads: ["5eb0e4c4b6c3bb0006eeb213"],
+    rocket: "5e9d0d95eda69973a809d1ec",
+    ships: ["5ea6ed2e080df4000697c905", "5ea6ed2f080df4000697c910"],
+    static_fire_date_unix: 1503600600,
+    static_fire_date_utc: "2017-08-24T18:50:00.000Z",
+    success: true,
+    tbd: false,
+    upcoming: false,
+    window: 2520
+}
